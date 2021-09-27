@@ -4,6 +4,8 @@ export interface Options {
   path: string;
 }
 
+// TODO: add deep object parsing
+
 // Parses a json env file and assigns the resulting variables to NODE envars
 export default function dotenv({ path = ".env.json" }: Options) {
   try {
@@ -13,6 +15,6 @@ export default function dotenv({ path = ".env.json" }: Options) {
     // Populate envars from resulting json data
     Object.assign(process.env, variables);
   } catch (err) {
-    console.log(`Error parsing json: ${err}`);
+    throw new Error(`Error parsing json: ${err}`);
   }
 }
